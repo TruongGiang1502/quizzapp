@@ -5,6 +5,7 @@ import 'package:quizz_app/screens/start_screen.dart';
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
 
+  
   @override
   State<Quiz> createState() => _QuizState();
 }
@@ -18,11 +19,16 @@ class _QuizState extends State<Quiz> {
   // //   activateScreen = StartScreen(switchScreen);
   // //   super.initState();
   // // }
+  List <String> selectedAnswer = [];
   void switchScreen() {
     setState(() {
       activateScreen = 'question-screen';
     });
   }
+
+  void chooseAnswer(String answer){
+    selectedAnswer.add(answer);
+  }  
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +47,7 @@ class _QuizState extends State<Quiz> {
             ),
             child: activateScreen == 'start-screen'
                 ? StartScreen(switchScreen)
-                : const QuestionScreen()),
+                : QuestionScreen(onSelectAnswer: chooseAnswer)),
       ),
     );
   }
